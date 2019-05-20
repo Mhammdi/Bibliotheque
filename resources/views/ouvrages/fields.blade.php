@@ -13,22 +13,13 @@
 <!-- Annee Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('annee', 'Annee:') !!}
-    {!! Form::date('annee', null, ['class' => 'form-control','id'=>'annee']) !!}
+    {!! Form::number('annee', null, ['class' => 'form-control']) !!}
 </div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#annee').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: false
-        })
-    </script>
-@endsection
 
 <!-- Domaine Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('domaine', 'Domaine:') !!}
-    {!! Form::text('domaine', null, ['class' => 'form-control']) !!}
+    {!! Form::select('domaine', ['Documentaire' => 'Documentaire', 'Litterature' => 'Litterature', 'Dictionnaire' => 'Dictionnaire', 'Biographique' => 'Biographique', 'Glossaire' => 'Glossaire', 'Nomenclature' => 'Nomenclature', 'Encyclopedie' => 'Encyclopedie', 'Poesie' => 'Poesie'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Stock Field -->

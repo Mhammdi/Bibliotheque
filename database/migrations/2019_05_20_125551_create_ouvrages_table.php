@@ -17,7 +17,7 @@ class CreateOuvragesTable extends Migration
             $table->increments('id');
             $table->string('titre');
             $table->string('editeur');
-            $table->date('annee');
+            $table->string('annee', 4);
             $table->string('domaine');
             $table->integer('stock');
             $table->string('site');

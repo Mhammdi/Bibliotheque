@@ -10,6 +10,8 @@ use App\Repositories\OuvrageRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OuvrageController extends AppBaseController
 {
@@ -52,8 +54,20 @@ class OuvrageController extends AppBaseController
     public function store(CreateOuvrageRequest $request)
     {
         $input = $request->all();
+        $current = Carbon::now();
 
-        $ouvrage = $this->ouvrageRepository->create($input);
+        DB::table('ouvrages')->insert([
+            'titre' => $input['titre'],
+            'editeur' => $input['editeur'],
+            'annee' => $input['annee'],
+            'domaine' => $input['domaine'],
+            'stock' => $input['stock'],
+            'site' => $input['site'],
+            'created_at' => $current,
+            'updated_at' => $current,
+            'deleted_at' => null
+
+        ]);
 
         Flash::success('Ouvrage saved successfully.');
 

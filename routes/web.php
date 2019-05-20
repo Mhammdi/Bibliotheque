@@ -44,6 +44,14 @@ Route::resource('etudiants', 'EtudiantController');
 
 Route::resource('employes', 'EmployeController');
 
-Route::resource('ouvrages', 'OuvrageController');
+
 
 Route::resource('auteurs', 'AuteurController');
+
+
+
+
+
+
+
+Route::resource('ouvrages', 'OuvrageController');

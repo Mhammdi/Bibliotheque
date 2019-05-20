@@ -10,6 +10,8 @@ use App\Repositories\EmployeRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class EmployeController extends AppBaseController
 {
@@ -53,7 +55,18 @@ class EmployeController extends AppBaseController
     {
         $input = $request->all();
 
-        $employe = $this->employeRepository->create($input);
+        $current = Carbon::now();
+
+        DB::table('employes')->insert([
+            'name' => $input['name'],
+            'adresse' => $input['adresse'],
+            'statut' => $input['statut'],
+            'affectation' => $input['affectation'],
+            'created_at' => $current,
+            'updated_at' => $current,
+            'deleted_at' => null
+
+        ]);
 
         Flash::success('Employe saved successfully.');
 

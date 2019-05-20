@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Ouvrage
  * @package App\Models
- * @version May 18, 2019, 4:15 pm UTC
+ * @version May 20, 2019, 12:55 pm UTC
  *
  * @property string titre
  * @property string editeur
@@ -45,7 +45,7 @@ class Ouvrage extends Model
         'id' => 'integer',
         'titre' => 'string',
         'editeur' => 'string',
-        'annee' => 'date',
+        'annee' => 'string',
         'domaine' => 'string',
         'stock' => 'integer',
         'site' => 'string'
@@ -59,7 +59,10 @@ class Ouvrage extends Model
     public static $rules = [
         'titre' => 'required',
         'editeur' => 'required',
-        'annee' => 'required'
+        'annee' => 'required',
+        'domaine' => 'required',
+        'stock' => 'required',
+        'site' => 'required'
     ];
 
     
