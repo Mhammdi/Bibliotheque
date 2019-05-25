@@ -21,6 +21,7 @@ class CreateOuvragesTable extends Migration
             $table->string('domaine');
             $table->integer('stock');
             $table->string('site');
+            $table->string('photo');
             $table->timestamps();
             $table->softDeletes();
         });

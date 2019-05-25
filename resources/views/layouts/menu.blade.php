@@ -24,6 +24,8 @@
 
 
 
+
+
 <li class="{{ Request::is('ouvrages*') ? 'active' : '' }}">
     <a href="{!! route('ouvrages.index') !!}"><i class="fa fa-edit"></i><span>Ouvrages</span></a>
 </li>

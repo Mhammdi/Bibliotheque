@@ -77,6 +77,17 @@
         "inIndex": true
     },
     {
+        "name": "photo",
+        "dbType": "string",
+        "htmlType": "file",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
         "name": "created_at",
         "dbType": "timestamp",
         "htmlType": null,

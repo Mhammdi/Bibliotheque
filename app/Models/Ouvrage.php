@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Ouvrage
  * @package App\Models
- * @version May 20, 2019, 12:55 pm UTC
+ * @version May 22, 2019, 10:11 am UTC
  *
  * @property string titre
  * @property string editeur
@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string domaine
  * @property integer stock
  * @property string site
+ * @property string photo
  */
 class Ouvrage extends Model
 {
@@ -33,7 +34,8 @@ class Ouvrage extends Model
         'annee',
         'domaine',
         'stock',
-        'site'
+        'site',
+        'photo'
     ];
 
     /**
@@ -48,7 +50,8 @@ class Ouvrage extends Model
         'annee' => 'string',
         'domaine' => 'string',
         'stock' => 'integer',
-        'site' => 'string'
+        'site' => 'string',
+        'photo' => 'string'
     ];
 
     /**
@@ -62,7 +65,8 @@ class Ouvrage extends Model
         'annee' => 'required',
         'domaine' => 'required',
         'stock' => 'required',
-        'site' => 'required'
+        'site' => 'required',
+        
     ];
 
     

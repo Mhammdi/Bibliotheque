@@ -10,6 +10,8 @@
     <p>{!! $ouvrage->titre !!}</p>
 </div>
 
+
+
 <!-- Editeur Field -->
 <div class="form-group">
     {!! Form::label('editeur', 'Editeur:') !!}
@@ -38,6 +40,12 @@
 <div class="form-group">
     {!! Form::label('site', 'Site:') !!}
     <p>{!! $ouvrage->site !!}</p>
+</div>
+
+<!-- Photo Field -->
+<div class="form-group">
+    {!! Form::label('photo', 'Photo:') !!}
+    <p>{!! $ouvrage->photo !!}</p>
 </div>
 
 <!-- Created At Field -->

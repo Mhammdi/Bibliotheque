@@ -22,31 +22,10 @@ Route::get('/home', 'HomeController@index');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('etudiants', 'EtudiantController');
-
 Route::resource('employes', 'EmployeController');
-
-
-
 Route::resource('auteurs', 'AuteurController');
+
 
 
 

@@ -64,13 +64,15 @@ class OuvrageDataTable extends DataTable
      */
     protected function getColumns()
     {
+       
         return [
             'titre',
             'editeur',
             'annee',
             'domaine',
             'stock',
-            'site'
+            'site',
+            'photo'
         ];
     }
 

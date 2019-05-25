@@ -53,9 +53,13 @@ class OuvrageController extends AppBaseController
      */
     public function store(CreateOuvrageRequest $request)
     {
-        $input = $request->all();
+        $input=$request->all();
         $current = Carbon::now();
-
+        $path='img/users/anonym.jpg';
+        if($request->hasFile('image')){
+            $path=$request->image->store('img/users');          
+        }
+        
         DB::table('ouvrages')->insert([
             'titre' => $input['titre'],
             'editeur' => $input['editeur'],
@@ -63,6 +67,7 @@ class OuvrageController extends AppBaseController
             'domaine' => $input['domaine'],
             'stock' => $input['stock'],
             'site' => $input['site'],
+            'photo' => $path,
             'created_at' => $current,
             'updated_at' => $current,
             'deleted_at' => null
@@ -125,15 +130,35 @@ class OuvrageController extends AppBaseController
     public function update($id, UpdateOuvrageRequest $request)
     {
         $ouvrage = $this->ouvrageRepository->find($id);
-
+        $input=$request->all();
+        
+        $current = Carbon::now();
+       
+       
+        if($request->hasFile('photo')){
+            $path=$request->photo->store('img/users');
+            DB::table('ouvrages')->where('id', $id)->update([
+            'photo' => $path,
+        ]);
+            
+        }
         if (empty($ouvrage)) {
             Flash::error('Ouvrage not found');
 
             return redirect(route('ouvrages.index'));
         }
 
-        $ouvrage = $this->ouvrageRepository->update($request->all(), $id);
+        DB::table('ouvrages')->where('id', $id)->update([
+            'titre' => $input['titre'],
+            'editeur' => $input['editeur'],
+            'annee' => $input['annee'],
+            'domaine' => $input['domaine'],
+            'stock' => $input['stock'],
+            'site' => $input['site'],
+            'updated_at' => $current,
 
+        ]);
+        
         Flash::success('Ouvrage updated successfully.');
 
         return redirect(route('ouvrages.index'));

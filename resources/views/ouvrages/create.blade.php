@@ -12,11 +12,11 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'ouvrages.store']) !!}
+                    <form method="POST" action="{{ url('ouvrages')}}" enctype="multipart/form-data">
+                        @csrf
 
                         @include('ouvrages.fields')
-
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>

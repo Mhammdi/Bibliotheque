@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class OuvrageRepository
  * @package App\Repositories
- * @version May 20, 2019, 12:55 pm UTC
+ * @version May 22, 2019, 10:11 am UTC
 */
 
 class OuvrageRepository extends BaseRepository
@@ -22,7 +22,8 @@ class OuvrageRepository extends BaseRepository
         'annee',
         'domaine',
         'stock',
-        'site'
+        'site',
+        'photo'
     ];
 
     /**
