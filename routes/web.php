@@ -25,6 +25,10 @@ Route::get('/home', 'HomeController@index');
 Route::resource('etudiants', 'EtudiantController');
 Route::resource('employes', 'EmployeController');
 
+Route::get('/biblio', function () {
+    return view('biblio');
+});
+
 
 
 

@@ -1,0 +1,90 @@
+.container-fluid {
+    padding: 0%;
+}
+
+.bg-light-nav {
+    background-color: #ffffff;
+    font-family: 'Open Sans';
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.img-back {
+    max-height: 100%;
+    max-width: 100%;
+    float: right;
+    margin-top: 5%;
+}
+
+.first-part {
+    background: linear-gradient(0.25turn, #ffffff, #e5eeff);
+    height: 58em;
+}
+
+#text-back {
+    font-weight: bold;
+    font-size: 506%;
+    margin-left: 10%;
+    margin-top: 6%;
+    line-height: 78px;
+}
+
+#p1 {
+    background-color: white;
+    height: 12%;
+    width: 31%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 24px 63px rgba(0, 0, 0, 0.15);
+    margin-left: 18%;
+    border-radius: 9px;
+    margin-top: 3%;
+}
+
+#p2 {
+    background-color: white;
+    height: 12%;
+    width: 31%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 24px 63px rgba(0, 0, 0, 0.15);
+    margin-left: 26%;
+    border-radius: 9px;
+    margin-top: 2%;
+}
+
+#p3 {
+    background-color: white;
+    height: 12%;
+    width: 31%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 24px 63px rgba(0, 0, 0, 0.15);
+    margin-left: 34%;
+    border-radius: 9px;
+    margin-top: 2%;
+}
+
+#search-btn {
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#book-img {
+    padding: 8%;
+}
+
+.card a {
+    text-decoration: none;
+    color: black;
+}
+
+#btn-emprenter {
+    width: 100%;
+    background-color: #4d9f08;
+    border: 1px none;
+    font-size: 19px;
+}
+
+#row-cards {
+    margin: auto;
+}
