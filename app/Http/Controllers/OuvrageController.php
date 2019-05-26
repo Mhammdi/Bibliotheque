@@ -12,6 +12,9 @@ use App\Http\Controllers\AppBaseController;
 use Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Write;
+use App\Models\Auteur;
+
 
 class OuvrageController extends AppBaseController
 {
@@ -59,8 +62,8 @@ class OuvrageController extends AppBaseController
         if($request->hasFile('image')){
             $path=$request->image->store('img/users');          
         }
-        
-        DB::table('ouvrages')->insert([
+
+        $ouvrage=DB::table('ouvrages')->insert([
             'titre' => $input['titre'],
             'editeur' => $input['editeur'],
             'annee' => $input['annee'],
@@ -71,9 +74,30 @@ class OuvrageController extends AppBaseController
             'created_at' => $current,
             'updated_at' => $current,
             'deleted_at' => null
-
         ]);
 
+
+        $write = new Write();
+        $ouvrageId = DB::table('ouvrages')->select('id')->max('id');
+        $count = DB::table('auteurs')->where('name', $input['auteur'])->count();
+        if($count > 0){
+            echo "hna";
+            $auteur = DB::table('auteurs')->where('name', $input['auteur'])->first();            
+            $write->auteur_id = $auteur->id;          
+        }else{
+            echo "test";
+            $auteur=new Auteur();
+            $auteur->name=$input['auteur'];
+            $auteur->save();
+            $auteurId = DB::table('auteurs')->select('id')->max('id');
+            $write->auteur_id=$auteurId;
+        }
+        $write->ouvrage_id = $ouvrageId;
+        $write->save(); 
+        
+          
+        
+        
         Flash::success('Ouvrage saved successfully.');
 
         return redirect(route('ouvrages.index'));

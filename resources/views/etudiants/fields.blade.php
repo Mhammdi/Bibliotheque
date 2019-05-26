@@ -13,7 +13,17 @@
 <!-- Universite Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('universite', 'Universite:') !!}
-    {!! Form::select('universite', ['FSSM' => 'FSSM', 'FSTG' => 'FSTG'], null, ['class' => 'form-control']) !!}
+    <?php
+
+    if (Auth::user()->niveau == 1) {
+        echo Form::select('Universite', ['FSTG' => 'FSTG'], null, ['class' => 'form-control']);
+    } else if (Auth::user()->niveau == 2) {
+        echo Form::select('Universite', ['FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    } else {
+        echo Form::select('Universite', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    }
+
+    ?>
 </div>
 
 <!-- Cursus Field -->

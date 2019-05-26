@@ -19,7 +19,17 @@
 <!-- Affectation Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('affectation', 'Affectation:') !!}
-    {!! Form::select('affectation', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']) !!}
+    <?php
+
+    if (Auth::user()->niveau == 1) {
+        echo Form::select('affectation', ['FSTG' => 'FSTG'], null, ['class' => 'form-control']);
+    } else if (Auth::user()->niveau == 2) {
+        echo Form::select('affectation', ['FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    } else {
+        echo Form::select('affectation', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    }
+
+    ?>
 </div>
 
 <!-- Submit Field -->

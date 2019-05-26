@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Ouvrage;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class OuvrageDataTable extends DataTable
 {
@@ -29,6 +30,16 @@ class OuvrageDataTable extends DataTable
      */
     public function query(Ouvrage $model)
     {
+        $niveau = Auth::user()->niveau;
+        if ($niveau == 1) {
+            $ouvrages = Ouvrage::where('site', 'FSTG');
+            return $this->applyScopes($ouvrages);
+        } else if ($niveau == 2) {
+            $ouvrages = Ouvrage::where('site', 'FSSM');
+            return $this->applyScopes($ouvrages);
+        } else {
+            return $model->newQuery();
+        }
         return $model->newQuery();
     }
 
@@ -72,7 +83,7 @@ class OuvrageDataTable extends DataTable
             'domaine',
             'stock',
             'site',
-            'photo'
+            
         ];
     }
 

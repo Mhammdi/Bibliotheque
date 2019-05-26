@@ -5,6 +5,8 @@ namespace App\DataTables;
 use App\Models\Employe;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmployeDataTable extends DataTable
 {
@@ -29,6 +31,16 @@ class EmployeDataTable extends DataTable
      */
     public function query(Employe $model)
     {
+        $niveau = Auth::user()->niveau;
+        if ($niveau == 1) {
+            $employes = Employe::where('affectation', 'FSTG');
+            return $this->applyScopes($employes);
+        } else if ($niveau == 2) {
+            $employes = Employe::where('affectation', 'FSSM');
+            return $this->applyScopes($employes);
+        } else {
+            return $model->newQuery();
+        }
         return $model->newQuery();
     }
 

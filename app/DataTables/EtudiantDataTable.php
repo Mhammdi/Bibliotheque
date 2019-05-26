@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Etudiant;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class EtudiantDataTable extends DataTable
 {
@@ -29,7 +30,20 @@ class EtudiantDataTable extends DataTable
      */
     public function query(Etudiant $model)
     {
-        return $model->newQuery();
+        $niveau=Auth::user()->niveau;
+        if($niveau == 1){    
+            $etudiants = Etudiant::where('universite', 'FSTG');
+            return $this->applyScopes($etudiants);
+        }else if($niveau == 2){
+            $etudiants = Etudiant::where('universite', 'FSSM');
+            return $this->applyScopes($etudiants);
+        }else{
+            return $model->newQuery();
+        }
+       
+
+        
+        //
     }
 
     /**
@@ -64,6 +78,9 @@ class EtudiantDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $user= Auth::user();
+
+        if($user->niveau){
         return [
             'name',
             'adresse',
@@ -71,6 +88,15 @@ class EtudiantDataTable extends DataTable
             'cursus',
             'nombre_emprunts'
         ];
+        }else{
+            return [
+                'name',
+                'adresse',
+                'universite',
+                'cursus',
+            ];
+
+        }
     }
 
     /**

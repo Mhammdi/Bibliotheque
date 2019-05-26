@@ -4,6 +4,10 @@
     {!! Form::text('titre', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('auteur', 'Auteur:') !!}
+    {!! Form::text('auteur', null, ['class' => 'form-control']) !!}
+</div>
 <!-- Editeur Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('editeur', 'Editeur:') !!}
@@ -31,7 +35,17 @@
 <!-- Site Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('site', 'Site:') !!}
-    {!! Form::select('site', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']) !!}
+    <?php
+
+    if (Auth::user()->niveau == 1) {
+        echo Form::select('site', ['FSTG' => 'FSTG'], null, ['class' => 'form-control']);
+    } else if (Auth::user()->niveau == 2) {
+        echo Form::select('site', ['FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    } else {
+        echo Form::select('site', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+    }
+
+    ?>
 </div>
 
 <!-- Photo Field -->

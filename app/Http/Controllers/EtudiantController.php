@@ -32,6 +32,7 @@ class EtudiantController extends AppBaseController
      */
     public function index(EtudiantDataTable $etudiantDataTable)
     {
+        
         return $etudiantDataTable->render('etudiants.index');
     }
 

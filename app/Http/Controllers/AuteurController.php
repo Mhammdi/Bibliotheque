@@ -79,7 +79,7 @@ class AuteurController extends AppBaseController
 
         return view('auteurs.show')->with('auteur', $auteur);
     }
-
+    
     /**
      * Show the form for editing the specified Auteur.
      *
