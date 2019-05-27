@@ -80,23 +80,17 @@ class EtudiantDataTable extends DataTable
     {
         $user= Auth::user();
 
-        if($user->niveau){
+        
         return [
+            'cne',
             'name',
             'adresse',
             'universite',
             'cursus',
-            'nombre_emprunts'
+            'nombre_emprunts',
+            
         ];
-        }else{
-            return [
-                'name',
-                'adresse',
-                'universite',
-                'cursus',
-            ];
-
-        }
+       
     }
 
     /**

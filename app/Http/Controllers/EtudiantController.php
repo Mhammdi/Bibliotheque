@@ -58,13 +58,15 @@ class EtudiantController extends AppBaseController
         $input = $request->all();
         
         $current = Carbon::now();
-
+        dump($input);
         DB::table('etudiants')->insert([
             'name' => $input['name'],
             'adresse' => $input['adresse'],
             'cursus' => $input['cursus'],
             'universite' => $input['universite'],
             'nombre_emprunts' => 5,
+            'cne' => $input['cne'],
+            'password' => $input['password'],
             'created_at' => $current,
             'updated_at' => $current,
             'deleted_at' => null

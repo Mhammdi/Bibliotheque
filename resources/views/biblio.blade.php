@@ -55,12 +55,16 @@
   </div>
   <table class="table table-striped table-hover">
     <tbody>
-      <tr>
-        <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"></a></td>
-        <td>London</td>
-        <td>Jun 15, 2017</td>
-        <td><span class="status text-success">&bull;</span> Delivered</td>
+      <tr v-for="ouvrage in ouvrages">
+
+        <td> <a v-bind:href="getLink(ouvrage.id)"><img v-bind:src="ouvrage.photo" class="avatar" alt="Avatar"> </a></td>
+        <td>@{{ouvrage.titre}}</td>
+        <td>@{{ouvrage.editeur}}</td>
+        <td>@{{ouvrage.domaine}}</td>
+        <td>@{{ouvrage.annee}}</td>
+        <td><span class="status text-success">&bull;</span> @{{disponible(ouvrage.stock)}}</td>
         <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+
       </tr>
 
     </tbody>
@@ -94,6 +98,16 @@
       ouvrages: {},
     },
     methods: {
+      disponible: function(stock) {
+        if (stock > 0) {
+          return "disponible";
+        } else {
+          return "stock Complet";
+        }
+      },
+      getLink: function(link) {
+       return "about"+link;
+      },
       getRatedOuvrages: function() {
         axios.get("http://localhost:8000/getRatedOuvrages")
           .then(response => {

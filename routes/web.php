@@ -28,12 +28,15 @@ Route::resource('employes', 'EmployeController');
 Route::get('/biblio', function () {
     return view('biblio');
 });
+Route::get('/about{id}', 'OuvrageController@getOuvrage');
+Route::get('/about{domaine}', 'OuvrageController@getOuvragesByDomaine');
+
 
 
 
 
 Route::get('getOuvrages', 'OuvrageController@getOuvrages');
-Route::get( 'getRatedOuvrages', 'OuvrageController@getRatedOuvrages');
+Route::get( 'getOuvragesByDomaine', 'OuvrageController@getRatedOuvrages');
 
 
 Route::get( 'getOuvrageRate{id}', 'RateController@getOuvrageRate');

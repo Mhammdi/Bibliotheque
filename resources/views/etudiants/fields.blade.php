@@ -14,16 +14,23 @@
 <div class="form-group col-sm-6">
     {!! Form::label('universite', 'Universite:') !!}
     <?php
-
     if (Auth::user()->niveau == 1) {
-        echo Form::select('Universite', ['FSTG' => 'FSTG'], null, ['class' => 'form-control']);
+        echo Form::select('universite', ['FSTG' => 'FSTG'], null, ['class' => 'form-control']);
     } else if (Auth::user()->niveau == 2) {
-        echo Form::select('Universite', ['FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+        echo Form::select('universite', ['FSSM' => 'FSSM'], null, ['class' => 'form-control']);
     } else {
-        echo Form::select('Universite', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']);
+        echo Form::select('universite', ['FSTG' => 'FSTG', 'FSSM' => 'FSSM'], null, ['class' => 'form-control']);
     }
 
     ?>
+</div>
+<div class="form-group col-sm-6">
+    {!! Form::label('cne', 'CNE:') !!}
+    {!! Form::text('cne', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group col-sm-6">
+    {!! Form::label('password', 'Password:') !!}
+    {!! Form::text('password', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Cursus Field -->

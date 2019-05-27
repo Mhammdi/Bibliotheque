@@ -31,7 +31,9 @@ class Etudiant extends Model
         'adresse',
         'universite',
         'cursus',
-        'nombre_emprunts'
+        'nombre_emprunts',
+        'cne',
+        'password'
     ];
 
     /**
@@ -45,7 +47,9 @@ class Etudiant extends Model
         'adresse' => 'string',
         'universite' => 'string',
         'cursus' => 'string',
-        'nombre_emprunts' => 'integer'
+        'nombre_emprunts' => 'integer',
+        'cne' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -56,7 +60,9 @@ class Etudiant extends Model
     public static $rules = [
         'name' => 'required',
         'adresse' => 'required',
-        'cursus' => 'required'
+        'cursus' => 'required',
+        'cne' => 'required',
+        'password' => 'required'
     ];
 
     

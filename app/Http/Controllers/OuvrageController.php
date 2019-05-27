@@ -37,9 +37,20 @@ class OuvrageController extends AppBaseController
     {
         return $ouvrageDataTable->render('ouvrages.index');
     }
-
+    public function getOuvrage($id)
+    {
+        $ouvrage = Ouvrage::find($id);
+        $ouvrages = DB::table('ouvrages')->where('domaine',$ouvrage->domaine)->take(5)->get();
+        return view('about', ['ouvrage' => $ouvrage,'ouvrages' => $ouvrages]);
+        
+    }
     public function getOuvrages(){
         $ouvrages=Ouvrage::all();
+        return response()->json(['ouvrages' => $ouvrages]);
+    }
+    public function getOuvragesByDomaine($domaine)
+    {
+        $ouvrages = Ouvrage::where("domaine", $domaine)->get();
         return response()->json(['ouvrages' => $ouvrages]);
     }
     public function getRatedOuvrages()
