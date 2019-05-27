@@ -42,6 +42,17 @@ class OuvrageController extends AppBaseController
         $ouvrages=Ouvrage::all();
         return response()->json(['ouvrages' => $ouvrages]);
     }
+    public function getRatedOuvrages()
+    {
+        $rates=DB::table('rates')->orderBy('rate')->take(6)->get();
+        $ouvrages=[];
+        $i=0;
+        foreach($rates as $rate){
+            $ouvrages[$i]=Ouvrage::find($rate->ouvrage_id);
+            $i++;       
+        }
+        return response()->json(['ouvrages' => $ouvrages]);
+    }
 
     /**
      * Show the form for creating a new Ouvrage.
@@ -96,7 +107,7 @@ class OuvrageController extends AppBaseController
             $auteur = DB::table('auteurs')->where('name', $input['auteur'])->first();            
             $write->auteur_id = $auteur->id;          
         }else{
-            echo "test";
+            
             $auteur=new Auteur();
             $auteur->name=$input['auteur'];
             $auteur->save();
@@ -188,17 +199,21 @@ class OuvrageController extends AppBaseController
         $count = DB::table('rates')->where('ouvrage_id', $id)->count();
         if($count>0){
             $rate = DB::table('rates')->where('ouvrage_id', $id)->first();
-            $rate=Rate::find($rate->id);
-            $rate->number=$input['rate'];
+            
+            $rates=Rate::find($rate->id);
+            $rates->number=$input['rate'];
+            dump($rates);
+            $rates->save();
 
         }else{
             $rate=new Rate();
             $rate->Ouvrage_id=$id;
             $rate->User_id=0;
             $rate->rate=$input['rate'];
+            $rate->save();
             
         }
-        $rate->save();
+        
 
         DB::table('ouvrages')->where('id', $id)->update([
             'titre' => $input['titre'],

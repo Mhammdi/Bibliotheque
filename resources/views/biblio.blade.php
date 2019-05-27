@@ -19,11 +19,11 @@
 
 <div class="row" style="margin-top: 4%;">
   <div class="col-sm">
-    <a href="#" style="color: black;text-decoration: none;margin-left: 20%;">Recommanded</a>
+    <button style="color: black;text-decoration: none;margin-left: 20%;" v-on:click="getRatedOuvrages()">Recommended</button>
   </div>
   <div class="col-sm" style="margin-left: -24%;"><span>|</span></div>
   <div class="col-sm">
-    <a href="#" style="color: black;text-decoration: none;margin-left: -99.5%;">Last updated</a>
+    <button style="color: black;text-decoration: none;margin-left: -99.5%;" v-on:click="getOuvrages()">Last updated</button>
   </div>
 </div>
 
@@ -45,6 +45,42 @@
 
 
 </div>
+<div class="table-wrapper" style="width: 83.4%; margin-top:4%">
+  <div class="table-title" style="background-color: transparent;color: black;">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Emprenter un <b>livre</b></h2>
+      </div>
+    </div>
+  </div>
+  <table class="table table-striped table-hover">
+    <tbody>
+      <tr>
+        <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"></a></td>
+        <td>London</td>
+        <td>Jun 15, 2017</td>
+        <td><span class="status text-success">&bull;</span> Delivered</td>
+        <td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="clearfix">
+    <div class="hint-text">Showing <b>1</b> out of <b>25</b> entries</div>
+    <ul class="pagination">
+      <li class="page-item disabled"><a href="#">Previous</a></li>
+      <li class="page-item"><a href="#" class="page-link">1</a></li>
+      <li class="page-item"><a href="#" class="page-link">2</a></li>
+      <li class="page-item"><a href="#" class="page-link">3</a></li>
+      <li class="page-item active"><a href="#" class="page-link">4</a></li>
+      <li class="page-item"><a href="#" class="page-link">5</a></li>
+      <li class="page-item"><a href="#" class="page-link">6</a></li>
+      <li class="page-item"><a href="#" class="page-link">7</a></li>
+      <li class="page-item"><a href="#" class="page-link">Next</a></li>
+    </ul>
+  </div>
+</div>
+</div>
 @endsection
 
 @section('scripts')
@@ -55,17 +91,21 @@
     el: "#app",
     data: {
       id: 0,
-      ouvrages: {
-        id: "",
-        titre: "",
-        editeur: "",
-        domaine: "",
-        stock: "",
-        site: "",
-        photo: "",
-      },
+      ouvrages: {},
     },
     methods: {
+      getRatedOuvrages: function() {
+        axios.get("http://localhost:8000/getRatedOuvrages")
+          .then(response => {
+            //this.ouvrages = response.data.ouvrages;
+            this.ouvrages = response.data.ouvrages;
+            console.log(this.ouvrages);
+
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
       imagePath: function(path) {
         //alert(path);
 
@@ -95,8 +135,9 @@
           })
       }
     },
-    mounted: function() {
+    created: function() {
       this.getOuvrages();
+      //this.getRatedOuvrages();
     }
 
   });

@@ -33,6 +33,8 @@ Route::get('/biblio', function () {
 
 
 Route::get('getOuvrages', 'OuvrageController@getOuvrages');
+Route::get( 'getRatedOuvrages', 'OuvrageController@getRatedOuvrages');
+
 
 Route::get( 'getOuvrageRate{id}', 'RateController@getOuvrageRate');
 
