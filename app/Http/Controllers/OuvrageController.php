@@ -13,8 +13,9 @@ use Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Write;
+use App\Rate;
 use App\Models\Auteur;
-
+use App\Models\Ouvrage;
 
 class OuvrageController extends AppBaseController
 {
@@ -35,6 +36,11 @@ class OuvrageController extends AppBaseController
     public function index(OuvrageDataTable $ouvrageDataTable)
     {
         return $ouvrageDataTable->render('ouvrages.index');
+    }
+
+    public function getOuvrages(){
+        $ouvrages=Ouvrage::all();
+        return response()->json(['ouvrages' => $ouvrages]);
     }
 
     /**
@@ -59,8 +65,9 @@ class OuvrageController extends AppBaseController
         $input=$request->all();
         $current = Carbon::now();
         $path='img/users/anonym.jpg';
-        if($request->hasFile('image')){
-            $path=$request->image->store('img/users');          
+       
+        if($request->hasFile('photo')){
+            $path=$request->photo->store('images'); 
         }
 
         $ouvrage=DB::table('ouvrages')->insert([
@@ -71,17 +78,21 @@ class OuvrageController extends AppBaseController
             'stock' => $input['stock'],
             'site' => $input['site'],
             'photo' => $path,
+            'description' => $input['description'],
             'created_at' => $current,
             'updated_at' => $current,
             'deleted_at' => null
         ]);
 
-
+        $rate=new Rate();
         $write = new Write();
         $ouvrageId = DB::table('ouvrages')->select('id')->max('id');
+        $rate->user_id = 0;
+        $rate->ouvrage_id =$ouvrageId;
+        $rate->save();
         $count = DB::table('auteurs')->where('name', $input['auteur'])->count();
         if($count > 0){
-            echo "hna";
+            
             $auteur = DB::table('auteurs')->where('name', $input['auteur'])->first();            
             $write->auteur_id = $auteur->id;          
         }else{
@@ -157,20 +168,37 @@ class OuvrageController extends AppBaseController
         $input=$request->all();
         
         $current = Carbon::now();
-       
+
        
         if($request->hasFile('photo')){
-            $path=$request->photo->store('img/users');
+            $path = $request->photo->store('images'); 
+            echo "test";
             DB::table('ouvrages')->where('id', $id)->update([
             'photo' => $path,
         ]);
             
         }
+        
         if (empty($ouvrage)) {
             Flash::error('Ouvrage not found');
 
             return redirect(route('ouvrages.index'));
         }
+
+        $count = DB::table('rates')->where('ouvrage_id', $id)->count();
+        if($count>0){
+            $rate = DB::table('rates')->where('ouvrage_id', $id)->first();
+            $rate=Rate::find($rate->id);
+            $rate->number=$input['rate'];
+
+        }else{
+            $rate=new Rate();
+            $rate->Ouvrage_id=$id;
+            $rate->User_id=0;
+            $rate->rate=$input['rate'];
+            
+        }
+        $rate->save();
 
         DB::table('ouvrages')->where('id', $id)->update([
             'titre' => $input['titre'],
@@ -179,6 +207,7 @@ class OuvrageController extends AppBaseController
             'domaine' => $input['domaine'],
             'stock' => $input['stock'],
             'site' => $input['site'],
+            'description' => $input['description'],
             'updated_at' => $current,
 
         ]);

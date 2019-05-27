@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer stock
  * @property string site
  * @property string photo
+ * @property string description
  */
 class Ouvrage extends Model
 {
@@ -35,7 +36,8 @@ class Ouvrage extends Model
         'domaine',
         'stock',
         'site',
-        'photo'
+        'photo',
+        'description'
     ];
 
     /**
@@ -51,7 +53,8 @@ class Ouvrage extends Model
         'domaine' => 'string',
         'stock' => 'integer',
         'site' => 'string',
-        'photo' => 'string'
+        'photo' => 'string',
+        'description' => 'string'
     ];
 
     /**
@@ -66,6 +69,7 @@ class Ouvrage extends Model
         'domaine' => 'required',
         'stock' => 'required',
         'site' => 'required',
+        'description' => 'required'
         
     ];
 

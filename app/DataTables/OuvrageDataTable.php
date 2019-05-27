@@ -83,6 +83,9 @@ class OuvrageDataTable extends DataTable
             'domaine',
             'stock',
             'site',
+            'description',
+            
+            
             
         ];
     }

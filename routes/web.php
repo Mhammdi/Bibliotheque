@@ -32,9 +32,9 @@ Route::get('/biblio', function () {
 
 
 
+Route::get('getOuvrages', 'OuvrageController@getOuvrages');
 
-
-
+Route::get( 'getOuvrageRate{id}', 'RateController@getOuvrageRate');
 
 
 Route::resource('ouvrages', 'OuvrageController');

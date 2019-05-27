@@ -31,6 +31,10 @@
     {!! Form::label('stock', 'Stock:') !!}
     {!! Form::number('stock', null, ['class' => 'form-control']) !!}
 </div>
+<div class="form-group col-sm-6">
+    {!! Form::label('rate', 'Rate:') !!}
+    {!! Form::number('rate', null, ['class' => 'form-control']) !!}
+</div>
 
 <!-- Site Field -->
 <div class="form-group col-sm-6">
@@ -53,10 +57,15 @@
     {!! Form::label('photo', 'Photo:') !!}
     {!! Form::file('photo') !!}
 </div>
+<div class="form-group col-sm-12">
+    {!! Form::label('description', 'Description:') !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+</div>
+
 <div class="clearfix"></div>
 
 <!-- Submit Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('ouvrages.index') !!}" class="btn btn-default">Cancel</a>
 </div>
